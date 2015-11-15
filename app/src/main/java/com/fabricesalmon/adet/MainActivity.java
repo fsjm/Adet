@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String ms_TAG = "MainActivity";
     private TextView m_UserTextView = null;
     private Button m_UserButton = null;
     private EditText m_UserEditText = null;
@@ -39,7 +40,31 @@ public class MainActivity extends AppCompatActivity {
         });
 
         m_UserEditText = (EditText)findViewById(R.id.UserEditText);
-        if (null != l_Bundle) m_UserEditText.setText(l_Bundle.getString("m_UserEditText"));
+
+        RestoreInstanceState(l_Bundle);
+
+        android.util.Log.i(ms_TAG, "On Create .....");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        android.util.Log.i(ms_TAG, "On Start .....");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        android.util.Log.i(ms_TAG, "On Restart .....");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        android.util.Log.i(ms_TAG, "On Resume .....");
     }
 
     @Override
@@ -50,5 +75,47 @@ public class MainActivity extends AppCompatActivity {
         // This bundle will be passed to onCreate if the process is
         // killed and restarted.
         l_Bundle.putString("m_UserEditText", m_UserEditText.getText().toString());
+
+        android.util.Log.i(ms_TAG, "On SaveInstanceState .....");
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle l_Bundle) {
+        super.onRestoreInstanceState(l_Bundle);
+
+        // Restore UI state from the savedInstanceState.
+        // This bundle has also been passed to onCreate.
+        RestoreInstanceState(l_Bundle);
+
+        android.util.Log.i(ms_TAG, "On RestoreInstanceState .....");
+    }
+
+    private void RestoreInstanceState(Bundle l_Bundle) {
+
+        if (null == l_Bundle) return;
+
+        String ms_UserEditText = l_Bundle.getString("m_UserEditText");
+        m_UserEditText.setText(ms_UserEditText);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        android.util.Log.i(ms_TAG, "On Pause .....");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        android.util.Log.i(ms_TAG, "On Stop .....");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        android.util.Log.i(ms_TAG, "On Destroy .....");
     }
 }
