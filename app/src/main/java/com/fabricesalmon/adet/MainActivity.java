@@ -11,9 +11,10 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.EditText;
+import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String ms_TAG = "MainActivity";
+    private final String ms_TAG = this.getClass().getSimpleName();
     private TextView m_UserTextView = null;
     private Button m_UserButton = null;
     private EditText m_UserEditText = null;
@@ -43,28 +44,28 @@ public class MainActivity extends AppCompatActivity {
 
         RestoreInstanceState(l_Bundle);
 
-        android.util.Log.i(ms_TAG, "On Create .....");
+        Log.i(ms_TAG, "On Create .....");
     }
 
     @Override
     protected void onStart() {
         super.onStart();
 
-        android.util.Log.i(ms_TAG, "On Start .....");
+        Log.i(ms_TAG, "On Start .....");
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
 
-        android.util.Log.i(ms_TAG, "On Restart .....");
+        Log.i(ms_TAG, "On Restart .....");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        android.util.Log.i(ms_TAG, "On Resume .....");
+        Log.i(ms_TAG, "On Resume .....");
     }
 
     @Override
@@ -76,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         // killed and restarted.
         l_Bundle.putString("m_UserEditText", m_UserEditText.getText().toString());
 
-        android.util.Log.i(ms_TAG, "On SaveInstanceState .....");
+        Log.i(ms_TAG, "On SaveInstanceState .....");
     }
 
     @Override
@@ -87,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         // This bundle has also been passed to onCreate.
         RestoreInstanceState(l_Bundle);
 
-        android.util.Log.i(ms_TAG, "On RestoreInstanceState .....");
+        Log.i(ms_TAG, "On RestoreInstanceState .....");
     }
 
     private void RestoreInstanceState(Bundle l_Bundle) {
@@ -102,20 +103,20 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
 
-        android.util.Log.i(ms_TAG, "On Pause .....");
+        Log.i(ms_TAG, "On Pause .....");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
 
-        android.util.Log.i(ms_TAG, "On Stop .....");
+        Log.i(ms_TAG, "On Stop .....");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
 
-        android.util.Log.i(ms_TAG, "On Destroy .....");
+        Log.i(ms_TAG, "On Destroy .....");
     }
 }
