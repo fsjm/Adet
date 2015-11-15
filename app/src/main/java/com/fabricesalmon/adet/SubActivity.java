@@ -17,21 +17,21 @@ public class SubActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        Log.i(ms_TAG, "On Start .....");
+        if(BuildConfig.DEBUG) Log.i(ms_TAG, "On Start .....");
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
 
-        Log.i(ms_TAG, "On Restart .....");
+        if(BuildConfig.DEBUG) Log.i(ms_TAG, "On Restart .....");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        Log.i(ms_TAG, "On Resume .....");
+        if(BuildConfig.DEBUG) Log.i(ms_TAG, "On Resume .....");
     }
 
     @Override
@@ -42,7 +42,7 @@ public class SubActivity extends AppCompatActivity {
         // This bundle will be passed to onCreate if the process is
         // killed and restarted.
 
-        Log.i(ms_TAG, "On SaveInstanceState .....");
+        if(BuildConfig.DEBUG) Log.i(ms_TAG, "On SaveInstanceState .....");
     }
 
     @Override
@@ -52,7 +52,7 @@ public class SubActivity extends AppCompatActivity {
         // Restore UI state from the savedInstanceState.
         // This bundle has also been passed to onCreate.
 
-        Log.i(ms_TAG, "On RestoreInstanceState .....");
+        if(BuildConfig.DEBUG) Log.i(ms_TAG, "On RestoreInstanceState .....");
     }
 
     private void RestoreInstanceState(Bundle l_Bundle) {
@@ -64,27 +64,27 @@ public class SubActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
 
-        Log.i(ms_TAG, "On Pause .....");
+        if(BuildConfig.DEBUG) Log.i(ms_TAG, "On Pause .....");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
 
-        Log.i(ms_TAG, "On Stop .....");
+        if(BuildConfig.DEBUG) Log.i(ms_TAG, "On Stop .....");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
 
-        Log.i(ms_TAG, "On Destroy .....");
+        if(BuildConfig.DEBUG) Log.i(ms_TAG, "On Destroy .....");
     }
 
     @Override
     public void onBackPressed() {
 
-        Log.i(ms_TAG, "On BackPressed .....");
+        if(BuildConfig.DEBUG) Log.i(ms_TAG, "On BackPressed .....");
 
         // Otherwise defer to system default behavior.
         super.onBackPressed();

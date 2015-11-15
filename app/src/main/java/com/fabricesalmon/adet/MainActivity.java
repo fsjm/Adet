@@ -55,28 +55,28 @@ public class MainActivity extends AppCompatActivity {
 
         RestoreInstanceState(l_Bundle);
 
-        Log.i(ms_TAG, "On Create .....");
+        if(BuildConfig.DEBUG) Log.i(ms_TAG, "On Create .....");
     }
 
     @Override
     protected void onStart() {
         super.onStart();
 
-        Log.i(ms_TAG, "On Start .....");
+        if(BuildConfig.DEBUG) Log.i(ms_TAG, "On Start .....");
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
 
-        Log.i(ms_TAG, "On Restart .....");
+        if(BuildConfig.DEBUG) Log.i(ms_TAG, "On Restart .....");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        Log.i(ms_TAG, "On Resume .....");
+        if(BuildConfig.DEBUG) Log.i(ms_TAG, "On Resume .....");
     }
 
     @Override
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         // killed and restarted.
         l_Bundle.putString("m_UserEditText", m_UserEditText.getText().toString());
 
-        Log.i(ms_TAG, "On SaveInstanceState .....");
+        if(BuildConfig.DEBUG) Log.i(ms_TAG, "On SaveInstanceState .....");
     }
 
     @Override
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         // This bundle has also been passed to onCreate.
         RestoreInstanceState(l_Bundle);
 
-        Log.i(ms_TAG, "On RestoreInstanceState .....");
+        if(BuildConfig.DEBUG) Log.i(ms_TAG, "On RestoreInstanceState .....");
     }
 
     private void RestoreInstanceState(Bundle l_Bundle) {
@@ -114,20 +114,20 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
 
-        Log.i(ms_TAG, "On Pause .....");
+        if(BuildConfig.DEBUG) Log.i(ms_TAG, "On Pause .....");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
 
-        Log.i(ms_TAG, "On Stop .....");
+        if(BuildConfig.DEBUG) Log.i(ms_TAG, "On Stop .....");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
 
-        Log.i(ms_TAG, "On Destroy .....");
+        if(BuildConfig.DEBUG) Log.i(ms_TAG, "On Destroy .....");
     }
 }
