@@ -17,6 +17,8 @@ public class MainActivity extends AppCompatActivity {
     private Button m_UserButton = null;
     private EditText m_UserEditText = null;
 
+// Add a comment
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,4 +41,4 @@ public class MainActivity extends AppCompatActivity {
         m_UserEditText = (EditText)findViewById(R.id.UserEditText);
     }
 
-} 
+}
