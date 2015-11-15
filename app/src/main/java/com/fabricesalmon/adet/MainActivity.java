@@ -12,11 +12,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.EditText;
 import android.util.Log;
+import android.content.Intent;
 
 public class MainActivity extends AppCompatActivity {
     private final String ms_TAG = this.getClass().getSimpleName();
     private TextView m_UserTextView = null;
     private Button m_UserButton = null;
+    private Button m_UserSubButton = null;
     private EditText m_UserEditText = null;
 
 // Add a comment !!!!
@@ -31,13 +33,22 @@ public class MainActivity extends AppCompatActivity {
         m_UserTextView.setText(R.string.welcome_message);
 
         m_UserButton = (Button)findViewById(R.id.UserButton);
-
         m_UserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Réagir au clic
                 m_UserTextView.setText(m_UserEditText.getText());
             }
+        });
+
+        m_UserSubButton = (Button)findViewById(R.id.UserSubButton);
+        m_UserSubButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Réagir au clic
+                Intent l_Intent = new Intent(MainActivity.this, SubActivity.class);
+                startActivity(l_Intent);
+             }
         });
 
         m_UserEditText = (EditText)findViewById(R.id.UserEditText);
