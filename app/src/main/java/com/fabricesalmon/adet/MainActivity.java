@@ -17,11 +17,11 @@ public class MainActivity extends AppCompatActivity {
     private Button m_UserButton = null;
     private EditText m_UserEditText = null;
 
-// Add a comment !!!
+// Add a comment !!!!
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void onCreate(Bundle l_Bundle) {
+        super.onCreate(l_Bundle);
 
         setContentView(R.layout.activity_main);
 
@@ -39,6 +39,16 @@ public class MainActivity extends AppCompatActivity {
         });
 
         m_UserEditText = (EditText)findViewById(R.id.UserEditText);
+        if (null != l_Bundle) m_UserEditText.setText(l_Bundle.getString("m_UserEditText"));
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle l_Bundle) {
+        super.onSaveInstanceState(l_Bundle);
+
+        // Save UI state changes to the savedInstanceState.
+        // This bundle will be passed to onCreate if the process is
+        // killed and restarted.
+        l_Bundle.putString("m_UserEditText", m_UserEditText.getText().toString());
+    }
 }
