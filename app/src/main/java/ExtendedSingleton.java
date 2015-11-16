@@ -34,7 +34,7 @@ public class ExtendedSingleton {
 
         m_ExtendedSharedPreferences.setValue(ls_Key, (Object)ls_Value);
     }
-    public void Write() {
+    public void WriteSharedPreferences() {
 
         m_ExtendedSharedPreferences.Write();
     }

@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         if(BuildConfig.DEBUG) Log.i(ms_TAG, "On Destroy .....");
 
-        ExtendedSingleton.getInstance().Write();
+        ExtendedSingleton.getInstance().WriteSharedPreferences();
         super.onDestroy();
     }
 }
