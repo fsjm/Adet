@@ -62,23 +62,23 @@ public class SubActivity extends AppCompatActivity {
 
     @Override
     protected void onPause() {
-        super.onPause();
-
         if(BuildConfig.DEBUG) Log.i(ms_TAG, "On Pause .....");
+
+        super.onPause();
     }
 
     @Override
     protected void onStop() {
-        super.onStop();
-
         if(BuildConfig.DEBUG) Log.i(ms_TAG, "On Stop .....");
+
+        super.onStop();
     }
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
-
         if(BuildConfig.DEBUG) Log.i(ms_TAG, "On Destroy .....");
+
+        super.onDestroy();
     }
 
     @Override
