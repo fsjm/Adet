@@ -3,14 +3,18 @@ package com.fabricesalmon.adet;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.EditText;
 
 public class SubActivity extends AppCompatActivity {
     private final String ms_TAG = this.getClass().getSimpleName();
+    private EditText m_UserEmailEditText = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub);
+
+        m_UserEmailEditText = (EditText)findViewById(R.id.UserEmailEditText);
     }
 
     @Override
@@ -85,6 +89,9 @@ public class SubActivity extends AppCompatActivity {
     public void onBackPressed() {
 
         if(BuildConfig.DEBUG) Log.i(ms_TAG, "On BackPressed .....");
+
+        String ls_UserEmailEditText = m_UserEmailEditText.getText().toString();
+        ExtendedSingleton.setValueToSharedPreferences("email", ls_UserEmailEditText);
 
         // Otherwise defer to system default behavior.
         super.onBackPressed();

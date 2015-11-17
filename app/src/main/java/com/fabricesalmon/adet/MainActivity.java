@@ -104,10 +104,16 @@ public class MainActivity extends AppCompatActivity {
 
     private void RestoreInstanceState(Bundle l_Bundle) {
 
-        if (null == l_Bundle) return;
+        if (null == l_Bundle) {
+            String ls_String = (String)ExtendedSingleton.getValueFromSharedPreferences("email");
 
-        String ms_UserEditText = l_Bundle.getString("m_UserEditText");
-        m_UserEditText.setText(ms_UserEditText);
+            if (null != ls_String) m_UserEditText.setText(ls_String);
+
+            return;
+        }
+
+        String ls_UserEditText = l_Bundle.getString("m_UserEditText");
+        m_UserEditText.setText(ls_UserEditText);
     }
 
     @Override
