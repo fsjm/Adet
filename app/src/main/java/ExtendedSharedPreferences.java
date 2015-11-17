@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import android.content.SharedPreferences;
 import android.util.Log;
+import android.widget.Toast;
 
 public class ExtendedSharedPreferences {
     private final String ms_TAG = this.getClass().getSimpleName();
@@ -42,10 +43,14 @@ public class ExtendedSharedPreferences {
 
         l_Editor.commit();
 
+        mb_ToBeWritten = false;
+
         if(BuildConfig.DEBUG) Log.i(ms_TAG, "Write .....");
     }
 
     public ExtendedSharedPreferences(String ls_Name) {
+
+        Toast.makeText(ExtendedApplication.getExtendedApplication(), "Loading data...", Toast.LENGTH_SHORT).show();
 
         ms_Name = ls_Name;
 

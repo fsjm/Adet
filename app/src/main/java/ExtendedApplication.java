@@ -3,7 +3,7 @@ package com.fabricesalmon.adet;
 import android.app.Application;
 
 public class ExtendedApplication extends Application {
-   static ExtendedApplication m_ExtendedApplication = null;
+    private static ExtendedApplication m_ExtendedApplication = null;
 
     @Override
     public void onCreate() {
@@ -19,10 +19,6 @@ public class ExtendedApplication extends Application {
     protected void initSingletons() {
         // Initialize the instance of MySingleton
         ExtendedSingleton.initInstance();
-    }
-
-    public void customAppMethod() {
-        // Custom application method
     }
 
     public static ExtendedApplication getExtendedApplication() {
