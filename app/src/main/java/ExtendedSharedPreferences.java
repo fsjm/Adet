@@ -27,6 +27,8 @@ public class ExtendedSharedPreferences {
 
     public void Write() {
 
+        if (!mb_ToBeWritten) return;
+
         SharedPreferences l_SharedPreferences = ExtendedApplication.getExtendedApplication().getSharedPreferences(ms_Name, 0);
         SharedPreferences.Editor l_Editor = l_SharedPreferences.edit();
 

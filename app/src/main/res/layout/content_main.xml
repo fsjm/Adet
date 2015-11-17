@@ -29,17 +29,6 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/UserEditText"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="34dp"
-        android:text="Enter here..."
-        android:inputType="text"
-        android:editable="false" />
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
