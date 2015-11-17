@@ -66,8 +66,6 @@ public class MainActivity extends AppCompatActivity {
         super.onRestart();
 
         if(BuildConfig.DEBUG) Log.i(ms_TAG, "On Restart .....");
-
-        RestoreInstanceState(null);
     }
 
     @Override
@@ -75,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
 
         if(BuildConfig.DEBUG) Log.i(ms_TAG, "On Resume .....");
+
+        RestoreInstanceState(null);
     }
 
     @Override
