@@ -64,7 +64,7 @@ public class BackGroundHTTPRequest extends BackgroundTaskBridge {
             l_HttpURLConnection.setRequestMethod((lb_isGet) ? "GET":"POST");
             l_HttpURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 //            l_HttpURLConnection.setRequestProperty("Content-Length","" + Integer.toString(ls_DataString.getBytes().length));
-            l_HttpURLConnection.setRequestProperty("Content-Language", "en-US");
+//            l_HttpURLConnection.setRequestProperty("Content-Language", "en-US");
             l_HttpURLConnection.setUseCaches(false);
             l_HttpURLConnection.setDoInput(true);
 
