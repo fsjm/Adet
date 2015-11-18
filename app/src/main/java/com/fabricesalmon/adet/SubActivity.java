@@ -107,6 +107,10 @@ public class SubActivity extends AppCompatActivity {
 
         if(BuildConfig.DEBUG) Log.i(ms_TAG, "On BackPressed .....");
 
+
+        BackGroundHTTPRequest.getInstance().setParameter4Get("http://www.google.fr", "a=1");
+        new Thread(BackGroundHTTPRequest.getInstance()).start();
+
         String ls_UserEmailEditText = m_UserEmailEditText.getText().toString();
         ExtendedSingleton.setValueToSharedPreferences("email", ls_UserEmailEditText);
 

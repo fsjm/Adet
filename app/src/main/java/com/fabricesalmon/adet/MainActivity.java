@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
     protected void onCreate(Bundle l_Bundle) {
         super.onCreate(l_Bundle);
 
-        BackgroundTask_1.getInstance().setObserver(this);
+        BackGroundHTTPRequest.getInstance().setObserver(this);
 
         if(BuildConfig.DEBUG) Log.i(ms_TAG, "On Create .....");
 
@@ -56,13 +56,10 @@ public class MainActivity extends AppCompatActivity implements Observer {
                 // Réagir au clic
                 Intent l_Intent = new Intent(MainActivity.this, SubActivity.class);
                 startActivity(l_Intent);
-             }
+            }
         });
 
         RestoreInstanceState(l_Bundle);
-
-        BackgroundTask_1.getInstance().setParameterObject();
-        new Thread(BackgroundTask_1.getInstance()).start();
     }
 
     @Override

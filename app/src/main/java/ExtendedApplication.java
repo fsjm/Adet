@@ -20,7 +20,7 @@ public class ExtendedApplication extends Application {
         // Initialize the instance of ExtendedSingleton
         ExtendedSingleton.initInstance();
 
-        BackgroundTask_1.initInstance();
+        BackGroundHTTPRequest.initInstance();
     }
 
     public static ExtendedApplication getExtendedApplication() {
