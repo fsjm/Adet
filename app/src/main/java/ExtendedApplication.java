@@ -17,7 +17,7 @@ public class ExtendedApplication extends Application {
     }
 
     protected void initSingletons() {
-        // Initialize the instance of MySingleton
+        // Initialize the instance of ExtendedSingleton
         ExtendedSingleton.initInstance();
 
         BackgroundTask_1.initInstance();

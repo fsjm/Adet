@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
 
         RestoreInstanceState(l_Bundle);
 
+        BackgroundTask_1.getInstance().setParameterObject();
         new Thread(BackgroundTask_1.getInstance()).start();
     }
 

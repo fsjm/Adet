@@ -7,23 +7,55 @@ import android.os.SystemClock;
 public class BackgroundTask_1 extends BackgroundTaskBridge {
     private final String ms_TAG = this.getClass().getSimpleName();
     private static BackgroundTask_1 m_BackgroundTask_1 = null;
+
+    private ParameterObject m_ParameterObject = null;
     private DataObject m_DataObject = null;
+    private Boolean mb_IsRunning = false;
+
+    public class ParameterObject {
+        public ParameterObject() {
+
+        }
+    }
     public class DataObject {
         public DataObject() {
 
         }
     }
 
+    public void setParameterObject() {
+        m_ParameterObject = new ParameterObject();
+    }
+
     public void run() {
-        if(BuildConfig.DEBUG) Log.i(ms_TAG, "run .....");
+        if (mb_IsRunning) {
+            if(BuildConfig.DEBUG) Log.i(ms_TAG, "already runnning .....");
 
-        m_DataObject = new DataObject();
+            return;
+        }
+        if (null == m_ParameterObject) {
+            if(BuildConfig.DEBUG) Log.i(ms_TAG, "m_ParameterObject is null .....");
 
-        //Code
-        SystemClock.sleep(2500);
+            return;
+        }
 
-        // We notify
-        NotifyObserver();
+        synchronized(mb_IsRunning) {
+            mb_IsRunning = true;
+            if(BuildConfig.DEBUG) Log.i(ms_TAG, "run .....");
+
+            m_DataObject = new DataObject();
+
+            //Code using m_ParameterObject
+            SystemClock.sleep(2500);
+
+            // We notify
+            NotifyObserver();
+
+            // we clean parameter object
+            m_ParameterObject = null;
+
+            mb_IsRunning = false;
+        }
     }
     public void NotifyObserver() {
         super.NotifyObserver(m_DataObject);
