@@ -6,6 +6,7 @@ public class ExtendedSingleton {
     private static ExtendedSingleton l_ExtendedSingleton = null;
 
     private static ExtendedSharedPreferences m_ExtendedSharedPreferences;
+    private static BackgroundTaskBridge m_BackgroundTaskBridge;
 
     public static void initInstance() {
         if (l_ExtendedSingleton == null) {
@@ -46,5 +47,6 @@ public class ExtendedSingleton {
     private ExtendedSingleton() {
 
         m_ExtendedSharedPreferences = new ExtendedSharedPreferences("Global");
+        m_BackgroundTaskBridge = new BackgroundTaskBridge();
     }
 }
