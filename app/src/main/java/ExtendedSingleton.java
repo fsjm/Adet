@@ -3,15 +3,14 @@ package com.fabricesalmon.adet;
 import android.util.Log;
 
 public class ExtendedSingleton {
-    private static ExtendedSingleton l_ExtendedSingleton = null;
+    private static ExtendedSingleton m_ExtendedSingleton = null;
 
     private static ExtendedSharedPreferences m_ExtendedSharedPreferences;
-    private static BackgroundTaskBridge m_BackgroundTaskBridge;
 
     public static void initInstance() {
-        if (l_ExtendedSingleton == null) {
+        if (m_ExtendedSingleton == null) {
             // Create the instance
-            l_ExtendedSingleton = new ExtendedSingleton();
+            m_ExtendedSingleton = new ExtendedSingleton();
 
             if(BuildConfig.DEBUG) Log.i("ExtendedSingleton", "initInstance .....");
         }
@@ -41,12 +40,11 @@ public class ExtendedSingleton {
     }
 
     public static ExtendedSingleton getInstance() {
-        return l_ExtendedSingleton;
+        return m_ExtendedSingleton;
     }
 
     private ExtendedSingleton() {
 
         m_ExtendedSharedPreferences = new ExtendedSharedPreferences("Global");
-        m_BackgroundTaskBridge = new BackgroundTaskBridge();
     }
 }

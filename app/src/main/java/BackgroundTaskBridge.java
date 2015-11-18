@@ -1,19 +1,17 @@
 package com.fabricesalmon.adet;
 
+import java.util.Observer;
 import java.util.Observable;
 import android.util.Log;
 
-public class BackgroundTaskBridge {
-    BackgroundTask_1 m_BackgroundTask_1 = null;
-    private class BackgroundTask_1 extends Observable {
+public abstract class BackgroundTaskBridge extends Observable implements Runnable {
 
-        public BackgroundTask_1() {
-
-        }
+    public void NotifyObserver(Object l_Object) {
+		setChanged();
+		notifyObservers(l_Object);
     }
+    public abstract void setObserver(Observer l_Observer);
+
     public BackgroundTaskBridge() {
-
-        m_BackgroundTask_1 = new BackgroundTask_1();
-
     }
 }

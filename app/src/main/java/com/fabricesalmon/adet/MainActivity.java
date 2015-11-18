@@ -13,18 +13,26 @@ import android.widget.TextView;
 import android.widget.EditText;
 import android.util.Log;
 import android.content.Intent;
+import java.util.Observer;
+import java.util.Observable;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Observer {
     private final String ms_TAG = this.getClass().getSimpleName();
     private TextView m_UserTextView = null;
     private Button m_UserButton = null;
     private Button m_UserSubButton = null;
 
-// Add a comment !!!!
+    public void update(Observable l_Observable, Object l_Object) {
+        if(l_Observable instanceof BackgroundTask_1){
+            if(BuildConfig.DEBUG) Log.i(ms_TAG, "update .....");
+        }
+    }
 
     @Override
     protected void onCreate(Bundle l_Bundle) {
         super.onCreate(l_Bundle);
+
+        BackgroundTask_1.getInstance().setObserver(this);
 
         if(BuildConfig.DEBUG) Log.i(ms_TAG, "On Create .....");
 
@@ -52,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         RestoreInstanceState(l_Bundle);
+
+        new Thread(BackgroundTask_1.getInstance()).start();
     }
 
     @Override
