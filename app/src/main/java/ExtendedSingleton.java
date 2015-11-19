@@ -6,7 +6,7 @@ public class ExtendedSingleton {
     private static ExtendedSingleton m_ExtendedSingleton = null;
 
     private static ExtendedSharedPreferences m_ExtendedSharedPreferences;
-
+//Todo: un test
     public static void initInstance() {
         if (m_ExtendedSingleton == null) {
             // Create the instance

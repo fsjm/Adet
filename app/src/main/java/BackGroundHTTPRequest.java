@@ -48,7 +48,6 @@ public class BackGroundHTTPRequest extends BackgroundTaskBridge {
     private DataObject HTTPRequest() {
 
         return HTTPRequestSend(m_ParameterObject.mb_isGet, m_ParameterObject.ms_URL, m_ParameterObject.ms_DataString);
-
     }
 
     private DataObject HTTPRequestSend(Boolean lb_isGet, String ls_URL, String ls_DataString) {
@@ -107,7 +106,7 @@ String query = builder.build().getEncodedQuery();
             l_BufferedReader.close();
             l_DataObject = new DataObject(l_Response.toString());
 
-            if(BuildConfig.DEBUG) Log.d("Server response", l_DataObject.ms_Response);
+            if(BuildConfig.DEBUG) Log.d(ms_TAG, "Response length: " + l_DataObject.ms_Response.length());
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
