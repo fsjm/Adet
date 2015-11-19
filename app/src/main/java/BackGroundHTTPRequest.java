@@ -101,12 +101,13 @@ String query = builder.build().getEncodedQuery();
             StringBuffer l_Response = new StringBuffer();
             while ((ls_Line = l_BufferedReader.readLine()) != null) {
                 l_Response.append(ls_Line);
-                l_Response.append('\r');
+//                l_Response.append('\r');
             }
             l_BufferedReader.close();
             l_DataObject = new DataObject(l_Response.toString());
 
             if(BuildConfig.DEBUG) Log.d(ms_TAG, "Response length: " + l_DataObject.ms_Response.length());
+            if(BuildConfig.DEBUG) Log.d(ms_TAG, "Response: " + l_DataObject.ms_Response);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
