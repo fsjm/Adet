@@ -3,6 +3,7 @@ package com.fabricesalmon.adet;
 import android.util.Log;
 import java.util.Observer;
 import java.net.URL;
+import android.net.Uri;
 import java.net.HttpURLConnection;
 import java.io.OutputStream;
 import java.io.BufferedWriter;
@@ -152,6 +153,16 @@ String query = builder.build().getEncodedQuery();
     public static BackGroundHTTPRequest getInstance() {
 
         return m_BackGroundHTTPRequest;
+    }
+    public static String BuildParameterString(String... lsa_Argument) {
+        int li_ArgumentLength = lsa_Argument.length;
+        Uri.Builder l_Builder = new Uri.Builder();
+
+        for (int i = 0; i < li_ArgumentLength; i+=2) {
+            l_Builder.appendQueryParameter(lsa_Argument[i], lsa_Argument[i + 1]);
+        }
+
+        return l_Builder.build().getEncodedQuery();
     }
     public static void initInstance() {
         if (m_BackGroundHTTPRequest == null) {
