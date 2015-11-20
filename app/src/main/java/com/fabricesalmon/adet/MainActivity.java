@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
         if(l_Observable instanceof BackGroundHTTPRequest){
             if(BuildConfig.DEBUG) Log.i(ms_TAG, "update .....");
 
+
             setTextFromBackGroundHTTPRequest(m_UserTextView, ((BackGroundHTTPRequest.DataObject) l_Object).ms_Response);
         }
     }
@@ -38,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements Observer {
             @Override
             public void run() {
                 try {
+                    Toast.makeText(ExtendedApplication.getExtendedApplication(), "Your data are ready!", Toast.LENGTH_SHORT).show();
+
                     JSONObject l_JSONObject = new JSONObject(ls_String);
 
                     JSONObject l_JSONObject4Unit = l_JSONObject.getJSONObject("unit");
