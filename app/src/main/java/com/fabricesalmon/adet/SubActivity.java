@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.content.Intent;
+import android.widget.Toast;
 
 public class SubActivity extends AppCompatActivity {
     private final String ms_TAG = this.getClass().getSimpleName();
@@ -38,13 +39,19 @@ public class SubActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String ls_UserEmailEditText = m_UserEmailEditText.getText().toString();
+
+                if (0 >= ls_UserEmailEditText.length()) {
+                    Toast.makeText(ExtendedApplication.getExtendedApplication(), "Cannot be empty!", Toast.LENGTH_SHORT).show();
+
+                    return;
+                }
                 ExtendedSingleton.setValueToSharedPreferences("email", ls_UserEmailEditText);
 
                 // Création de l'intent
                 Intent l_Intent = new Intent();
 
                 // On rajoute le nom saisie dans l'intent
-                l_Intent.putExtra("Nom", m_UserEmailEditText.getText().toString());
+                l_Intent.putExtra("email", ls_UserEmailEditText);
 
                 // On retourne le résultat avec l'intent
                 setResult(RESULT_OK, l_Intent);

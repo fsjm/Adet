@@ -83,16 +83,16 @@ public class MainActivity extends AppCompatActivity implements Observer {
             // Vérifie que le résultat est OK
             if(li_ResultCode == RESULT_OK) {
                 // On récupére le paramètre "Nom" de l'intent
-                String nom = l_Intent.getStringExtra("Nom");
+                String nom = l_Intent.getStringExtra("email");
 
                 // On affiche le résultat
-                Toast.makeText(this, "Votre nom est : " + nom, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Your email is: " + nom, Toast.LENGTH_SHORT).show();
 
                 // Si l'activité est annulé
             } else if (li_ResultCode == RESULT_CANCELED) {
 
                 // On affiche que l'opération est annulée
-                Toast.makeText(this, "Opération annulé", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Cancelled!", Toast.LENGTH_SHORT).show();
             }
         }
     }
