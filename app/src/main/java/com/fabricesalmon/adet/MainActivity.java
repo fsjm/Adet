@@ -15,17 +15,30 @@ import android.util.Log;
 import android.content.Intent;
 import java.util.Observer;
 import java.util.Observable;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements Observer {
+    public static final int CI_RETURN_CODE = 0;
+
     private final String ms_TAG = this.getClass().getSimpleName();
     private TextView m_UserTextView = null;
     private Button m_UserButton = null;
     private Button m_UserSubButton = null;
 
     public void update(Observable l_Observable, Object l_Object) {
-        if(l_Observable instanceof BackgroundTask_1){
+        if(l_Observable instanceof BackGroundHTTPRequest){
             if(BuildConfig.DEBUG) Log.i(ms_TAG, "update .....");
+
+            setTextFromBackGroundHTTPRequest(m_UserTextView, ((BackGroundHTTPRequest.DataObject) l_Object).ms_Response);
         }
+    }
+    private void setTextFromBackGroundHTTPRequest(final TextView l_TextView,final String ls_String){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                l_TextView.setText(ls_String);
+            }
+        });
     }
 
     @Override
@@ -39,7 +52,6 @@ public class MainActivity extends AppCompatActivity implements Observer {
         setContentView(R.layout.activity_main);
 
         m_UserTextView = (TextView)findViewById(R.id.UserTextView);
-        m_UserTextView.setText(R.string.welcome_message);
 
         m_UserButton = (Button)findViewById(R.id.UserButton);
         m_UserButton.setOnClickListener(new View.OnClickListener() {
@@ -55,11 +67,34 @@ public class MainActivity extends AppCompatActivity implements Observer {
             public void onClick(View v) {
                 // Réagir au clic
                 Intent l_Intent = new Intent(MainActivity.this, SubActivity.class);
-                startActivity(l_Intent);
+ //               startActivity(l_Intent);
+                startActivityForResult(l_Intent, CI_RETURN_CODE);
             }
         });
 
         RestoreInstanceState(l_Bundle);
+    }
+
+    protected void onActivityResult(int li_RequestCode, int li_ResultCode, Intent l_Intent) {
+
+        // Vérification du code de retour
+        if(li_RequestCode == CI_RETURN_CODE) {
+
+            // Vérifie que le résultat est OK
+            if(li_ResultCode == RESULT_OK) {
+                // On récupére le paramètre "Nom" de l'intent
+                String nom = l_Intent.getStringExtra("Nom");
+
+                // On affiche le résultat
+                Toast.makeText(this, "Votre nom est : " + nom, Toast.LENGTH_SHORT).show();
+
+                // Si l'activité est annulé
+            } else if (li_ResultCode == RESULT_CANCELED) {
+
+                // On affiche que l'opération est annulée
+                Toast.makeText(this, "Opération annulé", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     @Override
@@ -82,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
 
         if(BuildConfig.DEBUG) Log.i(ms_TAG, "On Resume .....");
 
-        RestoreInstanceState(null);
+//        RestoreInstanceState(null);
     }
 
     @Override
@@ -115,6 +150,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
             String ls_String = (String)ExtendedSingleton.getValueFromSharedPreferences("email");
 
             if (null != ls_String) m_UserTextView.setText(ls_String);
+            else m_UserTextView.setText(R.string.welcome_message);
 
             return;
         }

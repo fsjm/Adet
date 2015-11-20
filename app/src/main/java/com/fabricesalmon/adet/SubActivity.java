@@ -3,11 +3,17 @@ package com.fabricesalmon.adet;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.content.Intent;
 
 public class SubActivity extends AppCompatActivity {
     private final String ms_TAG = this.getClass().getSimpleName();
     private EditText m_UserEmailEditText = null;
+    private Button m_Sub_LauchHTTPRequest = null;
+    private Button m_Sub_UserSubmit = null;
+    private Button m_Sub_UserCancel = null;
 
     @Override
     protected void onCreate(Bundle l_Bundle) {
@@ -19,6 +25,47 @@ public class SubActivity extends AppCompatActivity {
 
         m_UserEmailEditText = (EditText)findViewById(R.id.UserEmailEditText);
 
+        m_Sub_LauchHTTPRequest = (Button)findViewById(R.id.Sub_LauchHTTPRequest);
+        m_Sub_LauchHTTPRequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BackGroundHTTPRequest.getInstance().setParameter4Get("http://weather.planetphoto.fr/weather.php", BackGroundHTTPRequest.BuildParameterString("city", "montpellier,france", "lang", "fr"));
+                new Thread(BackGroundHTTPRequest.getInstance()).start();
+            }
+        });
+        m_Sub_UserSubmit = (Button)findViewById(R.id.Sub_UserSubmit);
+        m_Sub_UserSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String ls_UserEmailEditText = m_UserEmailEditText.getText().toString();
+                ExtendedSingleton.setValueToSharedPreferences("email", ls_UserEmailEditText);
+
+                // Création de l'intent
+                Intent l_Intent = new Intent();
+
+                // On rajoute le nom saisie dans l'intent
+                l_Intent.putExtra("Nom", m_UserEmailEditText.getText().toString());
+
+                // On retourne le résultat avec l'intent
+                setResult(RESULT_OK, l_Intent);
+
+                finish();
+            }
+        });
+        m_Sub_UserCancel = (Button) findViewById(R.id.Sub_UserCancel);
+        m_Sub_UserCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Création de l'intent
+                Intent l_Intent = new Intent();
+
+                // On retourne le résultat avec l'intent
+                setResult(RESULT_CANCELED, l_Intent);
+
+                finish();
+            }
+        });
         RestoreInstanceState(l_Bundle);
     }
 
@@ -106,13 +153,6 @@ public class SubActivity extends AppCompatActivity {
     public void onBackPressed() {
 
         if(BuildConfig.DEBUG) Log.i(ms_TAG, "On BackPressed .....");
-
-
-        BackGroundHTTPRequest.getInstance().setParameter4Get("http://weather.planetphoto.fr/weather.php",  BackGroundHTTPRequest.BuildParameterString("city", "montpellier,france", "lang", "fr"));
-        new Thread(BackGroundHTTPRequest.getInstance()).start();
-
-        String ls_UserEmailEditText = m_UserEmailEditText.getText().toString();
-        ExtendedSingleton.setValueToSharedPreferences("email", ls_UserEmailEditText);
 
         // Otherwise defer to system default behavior.
         super.onBackPressed();
