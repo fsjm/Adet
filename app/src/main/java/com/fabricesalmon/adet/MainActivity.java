@@ -16,6 +16,7 @@ import android.content.Intent;
 import java.util.Observer;
 import java.util.Observable;
 import android.widget.Toast;
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity implements Observer {
     public static final int CI_RETURN_CODE = 0;
@@ -36,7 +37,23 @@ public class MainActivity extends AppCompatActivity implements Observer {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                l_TextView.setText(ls_String);
+                try {
+                    JSONObject l_JSONObject = new JSONObject(ls_String);
+
+                    JSONObject l_JSONObject4Unit = l_JSONObject.getJSONObject("unit");
+
+                    String ls_Result = l_JSONObject.getString("location");
+                    ls_Result = ls_Result.concat(": ");
+                    ls_Result = ls_Result.concat(l_JSONObject.getString("chill"));
+                    ls_Result = ls_Result.concat(" ");
+                    ls_Result = ls_Result.concat(l_JSONObject4Unit.getString("temperature"));
+                    ls_Result = ls_Result.concat(", ");
+                    ls_Result = ls_Result.concat(l_JSONObject.getString("condition"));
+
+                    l_TextView.setText(ls_Result);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
