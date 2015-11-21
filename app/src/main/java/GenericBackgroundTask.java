@@ -40,9 +40,12 @@ public class GenericBackgroundTask extends IntentService  {
                   String ls_DataString = l_Intent.getStringExtra(CS_HTTP_REQUEST_DATASTRING);
 
                   Object l_ParameterObject = null;
-                  if (CS_ACTION_GETHTTPREQUEST == ls_ActionType) BackGroundHTTPRequest.getInstance().setParameter4Get(ls_URL, ls_DataString);
-                  else l_ParameterObject = BackGroundHTTPRequest.getInstance().setParameter4Post(ls_URL, ls_DataString);
-                  BackGroundHTTPRequest.getInstance().start(l_ParameterObject);
+                  BackGroundHTTPRequest l_BackGroundHTTPRequest = BackGroundHTTPRequest.getInstance();
+
+                  if (CS_ACTION_GETHTTPREQUEST == ls_ActionType) l_ParameterObject = l_BackGroundHTTPRequest.setParameter4Get(ls_URL, ls_DataString);
+                  else l_ParameterObject = l_BackGroundHTTPRequest.setParameter4Post(ls_URL, ls_DataString);
+
+                  l_BackGroundHTTPRequest.start(l_ParameterObject);
 
                  break;
                default:
