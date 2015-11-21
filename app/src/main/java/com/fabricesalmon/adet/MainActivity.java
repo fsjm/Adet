@@ -13,15 +13,19 @@ import android.widget.TextView;
 import android.widget.EditText;
 import android.util.Log;
 import android.content.Intent;
+import android.content.IntentFilter;
 import java.util.Observer;
 import java.util.Observable;
 import android.widget.Toast;
 import org.json.JSONObject;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 
 public class MainActivity extends AppCompatActivity implements Observer {
     public static final int CI_RETURN_CODE = 0;
 
     private final String ms_TAG = this.getClass().getSimpleName();
+    Intent m_GenericBackgroundTaskIntent = null;
     private TextView m_UserTextView = null;
     private Button m_UserButton = null;
     private Button m_UserSubButton = null;
@@ -29,7 +33,6 @@ public class MainActivity extends AppCompatActivity implements Observer {
     public void update(Observable l_Observable, Object l_Object) {
         if(l_Observable instanceof BackGroundHTTPRequest){
             if(BuildConfig.DEBUG) Log.i(ms_TAG, "update .....");
-
 
             setTextFromBackGroundHTTPRequest(m_UserTextView, ((BackGroundHTTPRequest.DataObject) l_Object).ms_Response);
         }
@@ -71,14 +74,16 @@ public class MainActivity extends AppCompatActivity implements Observer {
 
         setContentView(R.layout.activity_main);
 
+        m_GenericBackgroundTaskIntent = new Intent(this, GenericBackgroundTask.class);
+
         m_UserTextView = (TextView)findViewById(R.id.UserTextView);
 
         m_UserButton = (Button)findViewById(R.id.UserButton);
         m_UserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Réagir au clic
-             }
+                // on lance le service
+            }
         });
 
         m_UserSubButton = (Button)findViewById(R.id.UserSubButton);
@@ -136,8 +141,6 @@ public class MainActivity extends AppCompatActivity implements Observer {
         super.onResume();
 
         if(BuildConfig.DEBUG) Log.i(ms_TAG, "On Resume .....");
-
-//        RestoreInstanceState(null);
     }
 
     @Override

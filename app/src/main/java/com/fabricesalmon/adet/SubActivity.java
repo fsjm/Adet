@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 public class SubActivity extends AppCompatActivity {
     private final String ms_TAG = this.getClass().getSimpleName();
+    Intent m_GenericBackgroundTaskIntent = null;
+
     private EditText m_UserEmailEditText = null;
     private Button m_Sub_LauchHTTPRequest = null;
     private Button m_Sub_UserSubmit = null;
@@ -24,14 +26,20 @@ public class SubActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_sub);
 
+        m_GenericBackgroundTaskIntent = new Intent(this, GenericBackgroundTask.class);
+
         m_UserEmailEditText = (EditText)findViewById(R.id.UserEmailEditText);
 
         m_Sub_LauchHTTPRequest = (Button)findViewById(R.id.Sub_LauchHTTPRequest);
         m_Sub_LauchHTTPRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BackGroundHTTPRequest.getInstance().setParameter4Get("http://weather.planetphoto.fr/weather.php", BackGroundHTTPRequest.BuildParameterString("city", "montpellier,france", "lang", "fr"));
-                new Thread(BackGroundHTTPRequest.getInstance()).start();
+                m_GenericBackgroundTaskIntent.putExtra(GenericBackgroundTask.CS_ACTION_TYPE, GenericBackgroundTask.CS_ACTION_HTTPREQUEST);
+
+                m_GenericBackgroundTaskIntent.putExtra(GenericBackgroundTask.CS_HTTP_REQUEST_URL, "http://weather.planetphoto.fr/weather.php");
+                m_GenericBackgroundTaskIntent.putExtra(GenericBackgroundTask.CS_HTTP_REQUEST_DATASTRING, BackGroundHTTPRequest.BuildParameterString("city", "montpellier,france", "lang", "fr"));
+
+                startService(m_GenericBackgroundTaskIntent);
             }
         });
         m_Sub_UserSubmit = (Button)findViewById(R.id.Sub_UserSubmit);

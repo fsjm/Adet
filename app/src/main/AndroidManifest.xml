@@ -21,7 +21,10 @@
         </activity>
         <activity android:name=".SubActivity" >
         </activity>
-     </application>
+        <service
+            android:name=".GenericBackgroundTask"
+            android:exported="false" />
+    </application>
     <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
