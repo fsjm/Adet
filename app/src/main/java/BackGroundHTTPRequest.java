@@ -69,13 +69,7 @@ public class BackGroundHTTPRequest extends BackgroundTaskBridge {
             l_HttpURLConnection.setDoInput(true);
 
 // Send request
-            /*
-Uri.Builder builder = new Uri.Builder()
-        .appendQueryParameter("firstParam", paramValue1)
-        .appendQueryParameter("secondParam", paramValue2)
-        .appendQueryParameter("thirdParam", paramValue3);
-String query = builder.build().getEncodedQuery();
-             */
+
             if (!lb_isGet) {
                 l_HttpURLConnection.setDoOutput(true);
                 OutputStream l_OutputStream = l_HttpURLConnection.getOutputStream();
@@ -118,12 +112,8 @@ String query = builder.build().getEncodedQuery();
         return l_DataObject;
     }
 
+    @Override
     public void run() {
-        if (mb_IsRunning) {
-            if(BuildConfig.DEBUG) Log.i(ms_TAG, "already runnning .....");
-
-            return;
-        }
         if (null == m_ParameterObject) {
             if(BuildConfig.DEBUG) Log.i(ms_TAG, "m_ParameterObject is null .....");
 
@@ -147,9 +137,11 @@ String query = builder.build().getEncodedQuery();
     public void NotifyObserver() {
         super.NotifyObserver(m_DataObject);
     }
+    @Override
     public void setObserver(Observer l_Observer) {
         addObserver(l_Observer);
     }
+
     public static BackGroundHTTPRequest getInstance() {
 
         return m_BackGroundHTTPRequest;
