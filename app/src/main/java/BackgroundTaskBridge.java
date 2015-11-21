@@ -7,6 +7,8 @@ import android.util.Log;
 public abstract class BackgroundTaskBridge extends Observable {
 
     public void NotifyObserver(Object l_Object) {
+        if(BuildConfig.DEBUG) Log.i("BackgroundTaskBridge", "On NotifyObserver .....");
+
 		setChanged();
 		notifyObservers(l_Object);
     }

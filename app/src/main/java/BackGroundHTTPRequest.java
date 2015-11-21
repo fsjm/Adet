@@ -115,7 +115,7 @@ public class BackGroundHTTPRequest extends BackgroundTaskBridge {
     @Override
     public void run() {
         if (null == m_ParameterObject) {
-            if(BuildConfig.DEBUG) Log.i(ms_TAG, "m_ParameterObject is null .....");
+            Log.i(ms_TAG, "m_ParameterObject is null .....");
 
             return;
         }
@@ -136,9 +136,13 @@ public class BackGroundHTTPRequest extends BackgroundTaskBridge {
     }
     public void NotifyObserver() {
         super.NotifyObserver(m_DataObject);
+
+        if(BuildConfig.DEBUG) Log.i(ms_TAG, "NotifyObserver .....");
     }
     @Override
     public void setObserver(Observer l_Observer) {
+        if(BuildConfig.DEBUG) Log.i(ms_TAG, "setObserver .....");
+
         addObserver(l_Observer);
     }
 

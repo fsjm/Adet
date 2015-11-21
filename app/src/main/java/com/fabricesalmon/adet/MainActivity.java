@@ -31,8 +31,9 @@ public class MainActivity extends AppCompatActivity implements Observer {
     private Button m_UserSubButton = null;
 
     public void update(Observable l_Observable, Object l_Object) {
+        if(BuildConfig.DEBUG) Log.i(ms_TAG, "update .....");
+
         if(l_Observable instanceof BackGroundHTTPRequest){
-            if(BuildConfig.DEBUG) Log.i(ms_TAG, "update .....");
 
             setTextFromBackGroundHTTPRequest(m_UserTextView, ((BackGroundHTTPRequest.DataObject) l_Object).ms_Response);
         }
@@ -68,9 +69,9 @@ public class MainActivity extends AppCompatActivity implements Observer {
     protected void onCreate(Bundle l_Bundle) {
         super.onCreate(l_Bundle);
 
-        BackGroundHTTPRequest.getInstance().setObserver(this);
-
         if(BuildConfig.DEBUG) Log.i(ms_TAG, "On Create .....");
+
+        BackGroundHTTPRequest.getInstance().setObserver(this);
 
         setContentView(R.layout.activity_main);
 
