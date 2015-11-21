@@ -20,7 +20,7 @@ public class BackGroundHTTPRequest extends BackgroundTaskBridge {
     private DataObject m_DataObject = null;
     private Boolean mb_IsRunning = false;
 
-    public class ParameterObject {
+    private class ParameterObject {
         Boolean mb_isGet;
         String ms_URL;
         String ms_DataString;
