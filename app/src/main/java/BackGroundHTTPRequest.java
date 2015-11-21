@@ -16,10 +16,6 @@ public class BackGroundHTTPRequest extends BackgroundTaskBridge {
     private final String ms_TAG = this.getClass().getSimpleName();
     private static BackGroundHTTPRequest m_BackGroundHTTPRequest = null;
 
-    private ParameterObject m_ParameterObject = null;
-    private DataObject m_DataObject = null;
-    private Boolean mb_IsRunning = false;
-
     private class ParameterObject {
         Boolean mb_isGet;
         String ms_URL;
@@ -39,17 +35,14 @@ public class BackGroundHTTPRequest extends BackgroundTaskBridge {
         }
     }
 
-    public void setParameter4Get(String ls_URL, String ls_QueryString) {
-        m_ParameterObject = new ParameterObject(true, ls_URL, ls_QueryString);
-    }
-    public void setParameter4Post(String ls_URL, String ls_PostData) {
-        m_ParameterObject = new ParameterObject(false, ls_URL, ls_PostData);
-    }
+    public Object setParameter4Get(String ls_URL, String ls_QueryString) {
 
-    private DataObject HTTPRequest() {
-
-        return HTTPRequestSend(m_ParameterObject.mb_isGet, m_ParameterObject.ms_URL, m_ParameterObject.ms_DataString);
+        return new ParameterObject(true, ls_URL, ls_QueryString);
     }
+    public Object setParameter4Post(String ls_URL, String ls_PostData) {
+
+        return new ParameterObject(false, ls_URL, ls_PostData);
+   }
 
     private DataObject HTTPRequestSend(Boolean lb_isGet, String ls_URL, String ls_DataString) {
         URL l_URL;
@@ -69,7 +62,6 @@ public class BackGroundHTTPRequest extends BackgroundTaskBridge {
             l_HttpURLConnection.setDoInput(true);
 
 // Send request
-
             if (!lb_isGet) {
                 l_HttpURLConnection.setDoOutput(true);
                 OutputStream l_OutputStream = l_HttpURLConnection.getOutputStream();
@@ -113,37 +105,14 @@ public class BackGroundHTTPRequest extends BackgroundTaskBridge {
     }
 
     @Override
-    public void run() {
-        if (null == m_ParameterObject) {
-            Log.i(ms_TAG, "m_ParameterObject is null .....");
+    protected Object Processing(Object l_ParameterObject) {
+         if(BuildConfig.DEBUG) Log.i(ms_TAG, "Processing .....");
+        ParameterObject m_ParameterObject = (ParameterObject)l_ParameterObject;
 
-            return;
-        }
+        // We notify if successfull
+        DataObject m_DataObject = HTTPRequestSend(m_ParameterObject.mb_isGet, m_ParameterObject.ms_URL, m_ParameterObject.ms_DataString);
 
-        synchronized(mb_IsRunning) {
-            mb_IsRunning = true;
-            if(BuildConfig.DEBUG) Log.i(ms_TAG, "run .....");
-
-            // We notify if successfull
-            if (null != (m_DataObject = HTTPRequest()))
-                NotifyObserver();
-
-            // we clean parameter object
-            m_ParameterObject = null;
-
-            mb_IsRunning = false;
-        }
-    }
-    public void NotifyObserver() {
-        super.NotifyObserver(m_DataObject);
-
-        if(BuildConfig.DEBUG) Log.i(ms_TAG, "NotifyObserver .....");
-    }
-    @Override
-    public void setObserver(Observer l_Observer) {
-        if(BuildConfig.DEBUG) Log.i(ms_TAG, "setObserver .....");
-
-        addObserver(l_Observer);
+        return m_DataObject;
     }
 
     public static BackGroundHTTPRequest getInstance() {

@@ -34,7 +34,7 @@ public class SubActivity extends AppCompatActivity {
         m_Sub_LauchHTTPRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                m_GenericBackgroundTaskIntent.putExtra(GenericBackgroundTask.CS_ACTION_TYPE, GenericBackgroundTask.CS_ACTION_HTTPREQUEST);
+                m_GenericBackgroundTaskIntent.putExtra(GenericBackgroundTask.CS_ACTION_TYPE, GenericBackgroundTask.CS_ACTION_GETHTTPREQUEST);
 
                 m_GenericBackgroundTaskIntent.putExtra(GenericBackgroundTask.CS_HTTP_REQUEST_URL, "http://weather.planetphoto.fr/weather.php");
                 m_GenericBackgroundTaskIntent.putExtra(GenericBackgroundTask.CS_HTTP_REQUEST_DATASTRING, BackGroundHTTPRequest.BuildParameterString("city", "montpellier,france", "lang", "fr"));
