@@ -32,7 +32,7 @@ public class SubActivity extends AppCompatActivity implements Observer {
 
         if(BuildConfig.DEBUG) Log.i(ms_TAG, "On Create .....");
 
-        BackGroundHTTPRequest.getInstance().setObserver(this);
+        BackGroundHTTPRequest.getInstance().addObserver(this);
 
         setContentView(R.layout.activity_sub);
 
@@ -177,6 +177,8 @@ public class SubActivity extends AppCompatActivity implements Observer {
     @Override
     protected void onDestroy() {
         if(BuildConfig.DEBUG) Log.i(ms_TAG, "On Destroy .....");
+
+        BackGroundHTTPRequest.getInstance().deleteObserver(this);
 
         super.onDestroy();
     }

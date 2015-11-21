@@ -24,19 +24,20 @@ public abstract class BackgroundTaskBridge extends Observable {
             return;
         }
 
-        NotifyObserver(l_DataObject);
+        setChanged();
+        notifyObservers(l_DataObject);
     }
 
-    public void NotifyObserver(Object l_Object) {
-        if(BuildConfig.DEBUG) Log.i("BackgroundTaskBridge", "NotifyObserver .....");
-
-		setChanged();
-		notifyObservers(l_Object);
-    }
-    public void setObserver(Observer l_Observer) {
+    public void addObserver(Observer l_Observer) {
         if(BuildConfig.DEBUG) Log.i(ms_TAG, "setObserver .....");
 
-        addObserver(l_Observer);
+        super.addObserver(l_Observer);
+    }
+
+    public void deleteObserver(Observer l_Observer) {
+        if(BuildConfig.DEBUG) Log.i(ms_TAG, "deleteObserver .....");
+
+        super.deleteObserver(l_Observer);
     }
 
     public BackgroundTaskBridge() {
