@@ -9,7 +9,10 @@ import android.widget.EditText;
 import android.content.Intent;
 import android.widget.Toast;
 
-public class SubActivity extends AppCompatActivity {
+import java.util.Observable;
+import java.util.Observer;
+
+public class SubActivity extends AppCompatActivity implements Observer {
     private final String ms_TAG = this.getClass().getSimpleName();
     Intent m_GenericBackgroundTaskIntent = null;
 
@@ -18,11 +21,18 @@ public class SubActivity extends AppCompatActivity {
     private Button m_Sub_UserSubmit = null;
     private Button m_Sub_UserCancel = null;
 
+    public void update(Observable l_Observable, Object l_Object) {
+        if(BuildConfig.DEBUG) Log.i(ms_TAG, "update .....");
+
+    }
+
     @Override
     protected void onCreate(Bundle l_Bundle) {
         super.onCreate(l_Bundle);
 
         if(BuildConfig.DEBUG) Log.i(ms_TAG, "On Create .....");
+
+        BackGroundHTTPRequest.getInstance().setObserver(this);
 
         setContentView(R.layout.activity_sub);
 
