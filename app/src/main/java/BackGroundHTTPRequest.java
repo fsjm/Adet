@@ -4,6 +4,8 @@ import android.util.Log;
 import java.util.Observer;
 import java.net.URL;
 import android.net.Uri;
+import android.net.NetworkInfo;
+import android.net.ConnectivityManager;
 import java.net.HttpURLConnection;
 import java.io.OutputStream;
 import java.io.BufferedWriter;
@@ -11,6 +13,7 @@ import java.io.OutputStreamWriter;
 import java.io.InputStream;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import android.content.Context;
 
 public class BackGroundHTTPRequest extends BackgroundTaskBridge {
     private Boolean is_Debugging = false;
@@ -45,10 +48,20 @@ public class BackGroundHTTPRequest extends BackgroundTaskBridge {
         return new ParameterObject(false, ls_URL, ls_PostData);
    }
 
+    private boolean isOnline() {
+        ConnectivityManager l_ConnectivityManager =
+                (ConnectivityManager) ExtendedApplication.getExtendedApplication().getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        return l_ConnectivityManager.getActiveNetworkInfo() != null &&
+                l_ConnectivityManager.getActiveNetworkInfo().isConnectedOrConnecting();
+    }
+
     private DataObject HTTPRequestSend(Boolean lb_isGet, String ls_URL, String ls_DataString) {
         URL l_URL;
         HttpURLConnection l_HttpURLConnection = null;
         DataObject l_DataObject = null;
+
+        if (!isOnline()) return null;
 
         try {
 // Create connection
