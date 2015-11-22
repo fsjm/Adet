@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
             public void onScroll(AbsListView view, int firstVisibleItem,
                                  int visibleItemCount, int totalItemCount) {
 
-                Log.i(ms_TAG, firstVisibleItem + " " + visibleItemCount + " " + totalItemCount);
+//                Log.i(ms_TAG, firstVisibleItem + " " + visibleItemCount + " " + totalItemCount);
                 if (!is_ReadyToFetch) return;
 
                 is_ReadyToFetch = false;
