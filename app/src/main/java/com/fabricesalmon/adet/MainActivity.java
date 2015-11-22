@@ -98,7 +98,12 @@ public class MainActivity extends AppCompatActivity implements Observer {
         m_UserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // on lance le service
+                m_GenericBackgroundTaskIntent.putExtra(GenericBackgroundTask.CS_ACTION_TYPE, GenericBackgroundTask.CS_ACTION_GETHTTPREQUEST);
+
+                m_GenericBackgroundTaskIntent.putExtra(GenericBackgroundTask.CS_HTTP_REQUEST_URL, "http://weather.planetphoto.fr/weather.php");
+                m_GenericBackgroundTaskIntent.putExtra(GenericBackgroundTask.CS_HTTP_REQUEST_DATASTRING, BackGroundHTTPRequest.BuildParameterString("city", "montpellier,france", "lang", "fr"));
+
+                startService(m_GenericBackgroundTaskIntent);
             }
         });
 
@@ -121,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
 
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
-//                Log.i(ms_TAG,"scrollState-->" +  scrollState);
+                Log.i(ms_TAG,"scrollState-->" +  scrollState);
 
                 if (OnScrollListener.SCROLL_STATE_TOUCH_SCROLL == scrollState) is_ReadyToFetch = true;
             }

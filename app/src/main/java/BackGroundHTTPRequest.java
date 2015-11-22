@@ -14,6 +14,7 @@ import java.io.InputStream;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import android.content.Context;
+import java.nio.charset.Charset;
 
 public class BackGroundHTTPRequest extends BackgroundTaskBridge {
     private Boolean is_Debugging = false;
@@ -68,10 +69,9 @@ public class BackGroundHTTPRequest extends BackgroundTaskBridge {
             l_URL = new URL(ls_URL + ((lb_isGet)?("?" + ls_DataString):""));
 
             l_HttpURLConnection = (HttpURLConnection) l_URL.openConnection();
-            l_HttpURLConnection.setRequestMethod((lb_isGet) ? "GET":"POST");
-            l_HttpURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            l_HttpURLConnection.setRequestMethod((lb_isGet) ? "GET" : "POST");
+            l_HttpURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
 //            l_HttpURLConnection.setRequestProperty("Content-Length","" + Integer.toString(ls_DataString.getBytes().length));
-//            l_HttpURLConnection.setRequestProperty("Content-Language", "en-US");
             l_HttpURLConnection.setUseCaches(false);
             l_HttpURLConnection.setDoInput(true);
 
@@ -97,7 +97,11 @@ public class BackGroundHTTPRequest extends BackgroundTaskBridge {
             else
                 l_InputStream = l_HttpURLConnection.getInputStream();
 
-            BufferedReader l_BufferedReader = new BufferedReader(new InputStreamReader(l_InputStream));
+            String ls_CharsetName = l_HttpURLConnection.getContentEncoding();
+            BufferedReader l_BufferedReader = null;
+            if (null == ls_CharsetName) l_BufferedReader = new BufferedReader(new InputStreamReader(l_InputStream, "ISO-8859-1"));
+            else l_BufferedReader = new BufferedReader(new InputStreamReader(l_InputStream, ls_CharsetName));
+
             String ls_Line;
             StringBuffer l_Response = new StringBuffer();
             while ((ls_Line = l_BufferedReader.readLine()) != null) {
