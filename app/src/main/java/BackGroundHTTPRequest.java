@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.net.NetworkInfo;
 import android.net.ConnectivityManager;
 import java.net.HttpURLConnection;
+import java.net.URLEncoder;
 import java.io.OutputStream;
 import java.io.BufferedWriter;
 import java.io.OutputStreamWriter;
@@ -137,12 +138,26 @@ public class BackGroundHTTPRequest extends BackgroundTaskBridge {
 
         return m_BackGroundHTTPRequest;
     }
-    public static String BuildParameterString(String... lsa_Argument) {
+    public static String BuildGetParameterString(String... lsa_Argument) {
         int li_ArgumentLength = lsa_Argument.length;
         Uri.Builder l_Builder = new Uri.Builder();
 
         for (int i = 0; i < li_ArgumentLength; i+=2) {
             l_Builder.appendQueryParameter(lsa_Argument[i], lsa_Argument[i + 1]);
+        }
+
+        return l_Builder.build().getEncodedQuery();
+    }
+    public static String BuildPostParameterString(String... lsa_Argument) {
+        int li_ArgumentLength = lsa_Argument.length;
+        Uri.Builder l_Builder = new Uri.Builder();
+
+        try {
+            for (int i = 0; i < li_ArgumentLength; i+=2) {
+                l_Builder.appendQueryParameter(URLEncoder.encode(lsa_Argument[i], "UTF-8"), URLEncoder.encode(lsa_Argument[i + 1], "UTF-8"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         return l_Builder.build().getEncodedQuery();
