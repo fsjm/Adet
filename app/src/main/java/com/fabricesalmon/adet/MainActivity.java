@@ -11,6 +11,8 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.ArrayAdapter;
 import android.util.Log;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -20,6 +22,11 @@ import android.widget.Toast;
 import org.json.JSONObject;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import java.util.List;
+import java.util.ArrayList;
+import android.graphics.Color;
+import android.widget.AbsListView.OnScrollListener;
+import android.widget.AbsListView;
 
 public class MainActivity extends AppCompatActivity implements Observer {
     public static final int CI_RETURN_CODE = 0;
@@ -30,13 +37,18 @@ public class MainActivity extends AppCompatActivity implements Observer {
     private Button m_UserButton = null;
     private Button m_UserSubButton = null;
 
+    private ListView m_UserListView = null;
+    List<ItemListView> m_ItemListView = null;
+
+    private ItemListViewAdapter m_ItemListViewAdapter = null;
+
     public void update(Observable l_Observable, Object l_Object) {
         if(BuildConfig.DEBUG) Log.i(ms_TAG, "update .....");
 
         if(l_Observable instanceof BackGroundHTTPRequest){
 
             setTextFromBackGroundHTTPRequest(m_UserTextView, ((BackGroundHTTPRequest.DataObject) l_Object).ms_Response);
-        }
+         }
     }
     private void setTextFromBackGroundHTTPRequest(final TextView l_TextView,final String ls_String){
         runOnUiThread(new Runnable() {
@@ -58,6 +70,9 @@ public class MainActivity extends AppCompatActivity implements Observer {
                     ls_Result = ls_Result.concat(l_JSONObject.getString("condition"));
 
                     l_TextView.setText(ls_Result);
+
+                    addItemListView(ls_Result);
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -98,7 +113,62 @@ public class MainActivity extends AppCompatActivity implements Observer {
             }
         });
 
+        m_UserListView = (ListView) findViewById(R.id.UserListView);
+
+        m_ItemListView = genererItemListView();
+        m_UserListView.setOnScrollListener(new OnScrollListener() {
+            Boolean is_ReadyToFetch = true;
+
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                Log.i(ms_TAG,"scrollState-->" +  scrollState);
+
+                if (OnScrollListener.SCROLL_STATE_TOUCH_SCROLL == scrollState) is_ReadyToFetch = true;
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem,
+                                 int visibleItemCount, int totalItemCount) {
+
+                Log.i(ms_TAG, firstVisibleItem + " " + visibleItemCount + " " + totalItemCount);
+                if (!is_ReadyToFetch) return;
+
+                is_ReadyToFetch = false;
+
+                if (visibleItemCount == totalItemCount - firstVisibleItem) {
+
+                     m_GenericBackgroundTaskIntent.putExtra(GenericBackgroundTask.CS_ACTION_TYPE, GenericBackgroundTask.CS_ACTION_GETHTTPREQUEST);
+
+                    m_GenericBackgroundTaskIntent.putExtra(GenericBackgroundTask.CS_HTTP_REQUEST_URL, "http://weather.planetphoto.fr/weather.php");
+                    m_GenericBackgroundTaskIntent.putExtra(GenericBackgroundTask.CS_HTTP_REQUEST_DATASTRING, BackGroundHTTPRequest.BuildParameterString("city", "montpellier,france", "lang", "fr"));
+
+                    startService(m_GenericBackgroundTaskIntent);
+                }
+             }
+        });
+
+        m_ItemListViewAdapter = new ItemListViewAdapter(MainActivity.this, m_ItemListView);
+        m_UserListView.setAdapter(m_ItemListViewAdapter);
+
         RestoreInstanceState(l_Bundle);
+    }
+
+    public void addItemListView(String ls_Text) {
+
+        m_ItemListView.add(new ItemListView(Color.GRAY, ls_Text));
+        m_ItemListViewAdapter.notifyDataSetChanged();
+    }
+
+    private List<ItemListView> genererItemListView(){
+        List<ItemListView> l_ItemListView = new ArrayList<ItemListView>();
+
+        l_ItemListView.add(new ItemListView(Color.BLACK, "Florent"));
+        l_ItemListView.add(new ItemListView(Color.BLUE, "Kevin"));
+        l_ItemListView.add(new ItemListView(Color.GREEN, "Logan"));
+        l_ItemListView.add(new ItemListView(Color.RED, "Mathieu"));
+        l_ItemListView.add(new ItemListView(Color.GRAY, "Willy"));
+
+        return l_ItemListView;
     }
 
     protected void onActivityResult(int li_RequestCode, int li_ResultCode, Intent l_Intent) {
