@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.util.Log;
 
 public class GenericBackgroundTask extends IntentService  {
+    private Boolean is_Debugging = false;
     public static final String CS_ACTION_TYPE = "ActionType";
 
     public static final String CS_ACTION_FORTESTING = "ForTesting";
@@ -19,16 +20,16 @@ public class GenericBackgroundTask extends IntentService  {
     public GenericBackgroundTask() {
         super("GenericBackgroundTask");
 
-        if(BuildConfig.DEBUG) Log.i(ms_TAG, "GenericBackgroundTask .....");
+        if (is_Debugging && BuildConfig.DEBUG) Log.i(ms_TAG, "GenericBackgroundTask .....");
     }
 
     @Override
     protected void onHandleIntent(Intent l_Intent) {
 
-        if (BuildConfig.DEBUG) Log.i(ms_TAG, "onHandleIntent .....");
+        if (is_Debugging && BuildConfig.DEBUG) Log.i(ms_TAG, "onHandleIntent .....");
 
         String ls_ActionType = l_Intent.getStringExtra(CS_ACTION_TYPE);
-        if (BuildConfig.DEBUG) Log.i(ms_TAG, "CS_ACTION_TYPE: " + ls_ActionType);
+        if (is_Debugging && BuildConfig.DEBUG) Log.i(ms_TAG, "CS_ACTION_TYPE: " + ls_ActionType);
 
           switch (ls_ActionType) {
               case CS_ACTION_FORTESTING:
@@ -50,7 +51,7 @@ public class GenericBackgroundTask extends IntentService  {
                  break;
                default:
 
-                  if (BuildConfig.DEBUG) Log.i(ms_TAG, "Unknown action type: " + ls_ActionType);
+                  if (is_Debugging && BuildConfig.DEBUG) Log.i(ms_TAG, "Unknown action type: " + ls_ActionType);
                   break;
         }
      }

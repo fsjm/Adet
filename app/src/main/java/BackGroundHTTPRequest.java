@@ -13,6 +13,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 public class BackGroundHTTPRequest extends BackgroundTaskBridge {
+    private Boolean is_Debugging = false;
     private final String ms_TAG = this.getClass().getSimpleName();
     private static BackGroundHTTPRequest m_BackGroundHTTPRequest = null;
 
@@ -93,8 +94,8 @@ public class BackGroundHTTPRequest extends BackgroundTaskBridge {
             l_BufferedReader.close();
             l_DataObject = new DataObject(l_Response.toString());
 
-            if(BuildConfig.DEBUG) Log.d(ms_TAG, "Response length: " + l_DataObject.ms_Response.length());
-            if(BuildConfig.DEBUG) Log.d(ms_TAG, "Response: " + l_DataObject.ms_Response);
+            if (is_Debugging && BuildConfig.DEBUG) Log.d(ms_TAG, "Response length: " + l_DataObject.ms_Response.length());
+            if (is_Debugging && BuildConfig.DEBUG) Log.d(ms_TAG, "Response: " + l_DataObject.ms_Response);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -106,7 +107,7 @@ public class BackGroundHTTPRequest extends BackgroundTaskBridge {
 
     @Override
     protected Object Processing(Object l_ParameterObject) {
-         if(BuildConfig.DEBUG) Log.i(ms_TAG, "Processing .....");
+        if (is_Debugging && BuildConfig.DEBUG) Log.i(ms_TAG, "Processing .....");
         ParameterObject m_ParameterObject = (ParameterObject)l_ParameterObject;
 
         // We notify if successfull

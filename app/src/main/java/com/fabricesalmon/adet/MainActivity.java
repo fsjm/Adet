@@ -117,11 +117,11 @@ public class MainActivity extends AppCompatActivity implements Observer {
 
         m_ItemListView = genererItemListView();
         m_UserListView.setOnScrollListener(new OnScrollListener() {
-            Boolean is_ReadyToFetch = true;
+            Boolean is_ReadyToFetch = false;
 
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
-                Log.i(ms_TAG,"scrollState-->" +  scrollState);
+//                Log.i(ms_TAG,"scrollState-->" +  scrollState);
 
                 if (OnScrollListener.SCROLL_STATE_TOUCH_SCROLL == scrollState) is_ReadyToFetch = true;
             }
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
             public void onScroll(AbsListView view, int firstVisibleItem,
                                  int visibleItemCount, int totalItemCount) {
 
-//                Log.i(ms_TAG, firstVisibleItem + " " + visibleItemCount + " " + totalItemCount);
+                Log.i(ms_TAG, firstVisibleItem + " " + visibleItemCount + " " + totalItemCount);
                 if (!is_ReadyToFetch) return;
 
                 is_ReadyToFetch = false;
