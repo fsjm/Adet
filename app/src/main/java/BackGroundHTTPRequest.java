@@ -18,8 +18,9 @@ import android.content.Context;
 import java.nio.charset.Charset;
 
 public class BackGroundHTTPRequest extends BackgroundTaskBridge {
-    private Boolean is_Debugging = false;
     private final String ms_TAG = this.getClass().getSimpleName();
+    private final static String CS_CHARSET = "utf-8";
+    private Boolean is_Debugging = false;
     private static BackGroundHTTPRequest m_BackGroundHTTPRequest = null;
 
     private class ParameterObject {
@@ -71,7 +72,7 @@ public class BackGroundHTTPRequest extends BackgroundTaskBridge {
 
             l_HttpURLConnection = (HttpURLConnection) l_URL.openConnection();
             l_HttpURLConnection.setRequestMethod((lb_isGet) ? "GET" : "POST");
-            l_HttpURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+            l_HttpURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=" + CS_CHARSET);
 //            l_HttpURLConnection.setRequestProperty("Content-Length","" + Integer.toString(ls_DataString.getBytes().length));
             l_HttpURLConnection.setUseCaches(false);
             l_HttpURLConnection.setDoInput(true);
@@ -81,7 +82,7 @@ public class BackGroundHTTPRequest extends BackgroundTaskBridge {
                 l_HttpURLConnection.setDoOutput(true);
                 OutputStream l_OutputStream = l_HttpURLConnection.getOutputStream();
                 BufferedWriter l_BufferedWriter = new BufferedWriter(
-                        new OutputStreamWriter(l_OutputStream, "UTF-8"));
+                        new OutputStreamWriter(l_OutputStream, CS_CHARSET));
                 l_BufferedWriter.write(ls_DataString);
                 l_BufferedWriter.flush();
                 l_BufferedWriter.close();
@@ -139,7 +140,7 @@ public class BackGroundHTTPRequest extends BackgroundTaskBridge {
 
         return m_BackGroundHTTPRequest;
     }
-    public static String BuildGetParameterString(String... lsa_Argument) {
+    public static String BuildParameterString(String... lsa_Argument) {
         int li_ArgumentLength = lsa_Argument.length;
         Uri.Builder l_Builder = new Uri.Builder();
 
@@ -149,20 +150,7 @@ public class BackGroundHTTPRequest extends BackgroundTaskBridge {
 
         return l_Builder.build().getEncodedQuery();
     }
-    public static String BuildPostParameterString(String... lsa_Argument) {
-        int li_ArgumentLength = lsa_Argument.length;
-        Uri.Builder l_Builder = new Uri.Builder();
 
-        try {
-            for (int i = 0; i < li_ArgumentLength; i+=2) {
-                l_Builder.appendQueryParameter(URLEncoder.encode(lsa_Argument[i], "UTF-8"), URLEncoder.encode(lsa_Argument[i + 1], "UTF-8"));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return l_Builder.build().getEncodedQuery();
-    }
     public static void initInstance() {
         if (m_BackGroundHTTPRequest == null) {
             // Create the instance

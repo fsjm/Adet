@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
                     String ls_Result = l_JSONObject.getString("location");
                     ls_Result = ls_Result.concat(": ");
                     ls_Result = ls_Result.concat(l_JSONObject.getString("chill"));
-                    ls_Result = ls_Result.concat(" ");
+                    ls_Result = ls_Result.concat("°");
                     ls_Result = ls_Result.concat(l_JSONObject4Unit.getString("temperature"));
                     ls_Result = ls_Result.concat(", ");
                     ls_Result = ls_Result.concat(l_JSONObject.getString("condition"));
@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
                 m_GenericBackgroundTaskIntent.putExtra(GenericBackgroundTask.CS_ACTION_TYPE, GenericBackgroundTask.CS_ACTION_GETHTTPREQUEST);
 
                 m_GenericBackgroundTaskIntent.putExtra(GenericBackgroundTask.CS_HTTP_REQUEST_URL, "http://weather.planetphoto.fr/weather.php");
-                m_GenericBackgroundTaskIntent.putExtra(GenericBackgroundTask.CS_HTTP_REQUEST_DATASTRING, BackGroundHTTPRequest.BuildGetParameterString("city", "montpellier,france", "lang", "fr"));
+                m_GenericBackgroundTaskIntent.putExtra(GenericBackgroundTask.CS_HTTP_REQUEST_DATASTRING, BackGroundHTTPRequest.BuildParameterString("city", "montpellier,france", "lang", "fr"));
 
                 startService(m_GenericBackgroundTaskIntent);
             }
@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
                      m_GenericBackgroundTaskIntent.putExtra(GenericBackgroundTask.CS_ACTION_TYPE, GenericBackgroundTask.CS_ACTION_GETHTTPREQUEST);
 
                     m_GenericBackgroundTaskIntent.putExtra(GenericBackgroundTask.CS_HTTP_REQUEST_URL, "http://weather.planetphoto.fr/weather.php");
-                    m_GenericBackgroundTaskIntent.putExtra(GenericBackgroundTask.CS_HTTP_REQUEST_DATASTRING, BackGroundHTTPRequest.BuildGetParameterString("city", "montpellier,france", "lang", "fr"));
+                    m_GenericBackgroundTaskIntent.putExtra(GenericBackgroundTask.CS_HTTP_REQUEST_DATASTRING, BackGroundHTTPRequest.BuildParameterString("city", "montpellier,france", "lang", "fr"));
 
                     startService(m_GenericBackgroundTaskIntent);
                 }
