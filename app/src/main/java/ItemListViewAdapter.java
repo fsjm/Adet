@@ -24,9 +24,9 @@ public class ItemListViewAdapter extends ArrayAdapter<ItemListView> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.listviewlayout,parent, false);
         }
 
-        TweetViewHolder viewHolder = (TweetViewHolder) convertView.getTag();
+        ItemListViewHolder viewHolder = (ItemListViewHolder) convertView.getTag();
         if(viewHolder == null){
-            viewHolder = new TweetViewHolder();
+            viewHolder = new ItemListViewHolder();
             viewHolder.pseudo = (TextView) convertView.findViewById(R.id.pseudo);
             viewHolder.avatar = (ImageView) convertView.findViewById(R.id.avatar);
             convertView.setTag(viewHolder);
@@ -42,7 +42,7 @@ public class ItemListViewAdapter extends ArrayAdapter<ItemListView> {
         return convertView;
     }
 
-    private class TweetViewHolder{
+    private class ItemListViewHolder{
         public TextView pseudo;
         public ImageView avatar;
     }
