@@ -87,7 +87,7 @@ public class BackGroundHTTPRequest extends BackgroundTaskBridge {
                 l_BufferedWriter.close();
                 l_OutputStream.close();
             }
-
+// https://github.com/mcxiaoke/android-volley/tree/master/src/main/java/com/android/volley/toolbox
 // Get Response
             int li_Status = l_HttpURLConnection.getResponseCode();
 
@@ -100,6 +100,7 @@ public class BackGroundHTTPRequest extends BackgroundTaskBridge {
 
             String ls_CharsetName = l_HttpURLConnection.getContentEncoding();
             BufferedReader l_BufferedReader = null;
+// According to the HTTP 1.1 spec the default charset for "text" MIME content types received via HTTP is ISO-8859-1
             if (null == ls_CharsetName) l_BufferedReader = new BufferedReader(new InputStreamReader(l_InputStream, "ISO-8859-1"));
             else l_BufferedReader = new BufferedReader(new InputStreamReader(l_InputStream, ls_CharsetName));
 
