@@ -24,27 +24,27 @@ public class ItemListViewAdapter extends ArrayAdapter<ItemListView> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.listviewlayout,parent, false);
         }
 
-        ItemListViewHolder viewHolder = (ItemListViewHolder) convertView.getTag();
-        if(viewHolder == null){
-            viewHolder = new ItemListViewHolder();
-            viewHolder.pseudo = (TextView) convertView.findViewById(R.id.pseudo);
-            viewHolder.avatar = (ImageView) convertView.findViewById(R.id.avatar);
-            convertView.setTag(viewHolder);
+        ListItemViewHolder l_ListItemViewHolder = (ListItemViewHolder) convertView.getTag();
+        if(l_ListItemViewHolder == null){
+            l_ListItemViewHolder = new ListItemViewHolder();
+            l_ListItemViewHolder.ms_Pseudo = (TextView) convertView.findViewById(R.id.pseudo);
+            l_ListItemViewHolder.m_Avatar = (ImageView) convertView.findViewById(R.id.avatar);
+            convertView.setTag(l_ListItemViewHolder);
         }
 
         //getItem(position) va récupérer l'item [position] de la List<Tweet> tweets
         ItemListView l_ItemListView = getItem(position);
 
         //il ne reste plus qu'à remplir notre vue
-        viewHolder.pseudo.setText(l_ItemListView.getPseudo());
-        viewHolder.avatar.setImageDrawable(new ColorDrawable(l_ItemListView.getColor()));
+        l_ListItemViewHolder.ms_Pseudo.setText(l_ItemListView.getPseudo());
+        l_ListItemViewHolder.m_Avatar.setImageDrawable(new ColorDrawable(l_ItemListView.getColor()));
 
         return convertView;
     }
 
-    private class ItemListViewHolder{
-        public TextView pseudo;
-        public ImageView avatar;
+    private class ListItemViewHolder{
+        public TextView ms_Pseudo;
+        public ImageView m_Avatar;
     }
 }
 
