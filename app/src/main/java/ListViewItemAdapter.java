@@ -27,7 +27,7 @@ public class ListViewItemAdapter extends ArrayAdapter<ListViewItem> {
         ListViewItemHolder l_ListViewItemHolder = (ListViewItemHolder) convertView.getTag();
         if(l_ListViewItemHolder == null){
             l_ListViewItemHolder = new ListViewItemHolder();
-            l_ListViewItemHolder.ms_Pseudo = (TextView) convertView.findViewById(R.id.pseudo);
+            l_ListViewItemHolder.m_Pseudo = (TextView) convertView.findViewById(R.id.pseudo);
             l_ListViewItemHolder.m_Avatar = (ImageView) convertView.findViewById(R.id.avatar);
             convertView.setTag(l_ListViewItemHolder);
         }
@@ -36,14 +36,14 @@ public class ListViewItemAdapter extends ArrayAdapter<ListViewItem> {
         ListViewItem l_ListViewItem = getItem(position);
 
         //il ne reste plus qu'à remplir notre vue
-        l_ListViewItemHolder.ms_Pseudo.setText(l_ListViewItem.getPseudo());
+        l_ListViewItemHolder.m_Pseudo.setText(l_ListViewItem.getPseudo());
         l_ListViewItemHolder.m_Avatar.setImageDrawable(new ColorDrawable(l_ListViewItem.getColor()));
 
         return convertView;
     }
 
     private class ListViewItemHolder{
-        public TextView ms_Pseudo;
+        public TextView m_Pseudo;
         public ImageView m_Avatar;
     }
 }
