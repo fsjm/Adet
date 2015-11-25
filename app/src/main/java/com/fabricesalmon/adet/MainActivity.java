@@ -38,9 +38,9 @@ public class MainActivity extends AppCompatActivity implements Observer {
     private Button m_UserSubButton = null;
 
     private ListView m_UserListView = null;
-    List<ItemListView> m_ItemListView = null;
+    List<ListViewItem> m_ListViewItem = null;
 
-    private ItemListViewAdapter m_ItemListViewAdapter = null;
+    private ListViewItemAdapter m_ListViewItemAdapter = null;
 
     public void update(Observable l_Observable, Object l_Object) {
         if(BuildConfig.DEBUG) Log.i(ms_TAG, "update .....");
@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
 
         m_UserListView = (ListView) findViewById(R.id.UserListView);
 
-        m_ItemListView = genererItemListView();
+        m_ListViewItem = genererListViewItem();
         m_UserListView.setOnScrollListener(new OnScrollListener() {
             Boolean is_ReadyToFetch = false;
 
@@ -152,28 +152,28 @@ public class MainActivity extends AppCompatActivity implements Observer {
              }
         });
 
-        m_ItemListViewAdapter = new ItemListViewAdapter(MainActivity.this, m_ItemListView);
-        m_UserListView.setAdapter(m_ItemListViewAdapter);
+        m_ListViewItemAdapter = new ListViewItemAdapter(MainActivity.this, m_ListViewItem);
+        m_UserListView.setAdapter(m_ListViewItemAdapter);
 
         RestoreInstanceState(l_Bundle);
     }
 
     public void addItemListView(String ls_Text) {
 
-        m_ItemListView.add(new ItemListView(Color.GRAY, ls_Text));
-        m_ItemListViewAdapter.notifyDataSetChanged();
+        m_ListViewItem.add(new ListViewItem(Color.GRAY, ls_Text));
+        m_ListViewItemAdapter.notifyDataSetChanged();
     }
 
-    private List<ItemListView> genererItemListView(){
-        List<ItemListView> l_ItemListView = new ArrayList<ItemListView>();
+    private List<ListViewItem> genererListViewItem(){
+        List<ListViewItem> l_ListViewItem = new ArrayList<ListViewItem>();
 
-        l_ItemListView.add(new ItemListView(Color.BLACK, "Florent"));
-        l_ItemListView.add(new ItemListView(Color.BLUE, "Kevin"));
-        l_ItemListView.add(new ItemListView(Color.GREEN, "Logan"));
-        l_ItemListView.add(new ItemListView(Color.RED, "Mathieu"));
-        l_ItemListView.add(new ItemListView(Color.GRAY, "Willy"));
+        l_ListViewItem.add(new ListViewItem(Color.BLACK, "Florent"));
+        l_ListViewItem.add(new ListViewItem(Color.BLUE, "Kevin"));
+        l_ListViewItem.add(new ListViewItem(Color.GREEN, "Logan"));
+        l_ListViewItem.add(new ListViewItem(Color.RED, "Mathieu"));
+        l_ListViewItem.add(new ListViewItem(Color.GRAY, "Willy"));
 
-        return l_ItemListView;
+        return l_ListViewItem;
     }
 
     protected void onActivityResult(int li_RequestCode, int li_ResultCode, Intent l_Intent) {
