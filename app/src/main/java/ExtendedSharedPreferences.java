@@ -1,10 +1,11 @@
 package com.fabricesalmon.adet;
 
-import java.util.HashMap;
-import java.util.Map;
 import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Toast;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ExtendedSharedPreferences {
     private final String ms_TAG = this.getClass().getSimpleName();

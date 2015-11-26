@@ -1,8 +1,9 @@
 package com.fabricesalmon.adet;
 
-import java.util.Observer;
-import java.util.Observable;
 import android.util.Log;
+
+import java.util.Observable;
+import java.util.Observer;
 
 public abstract class BackgroundTaskBridge extends Observable {
     private Boolean is_Debugging = false;
