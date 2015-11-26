@@ -162,6 +162,8 @@ public class MainActivity extends AppCompatActivity implements Observer {
 
         m_ListViewItem.add(new ListViewItem(Color.GRAY, ls_Text));
         m_ListViewItemAdapter.notifyDataSetChanged();
+
+        m_UserListView.setSelection(m_ListViewItem.size());
     }
 
     private List<ListViewItem> genererListViewItem(){
