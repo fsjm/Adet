@@ -7,6 +7,7 @@ public class ListViewItem {
     public String getPseudo() {
         return ms_Pseudo;
     }
+
     public int getColor() {
         return mi_Color;
     }

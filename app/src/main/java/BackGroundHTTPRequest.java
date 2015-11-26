@@ -52,8 +52,7 @@ public class BackGroundHTTPRequest extends BackgroundTaskBridge {
         ConnectivityManager l_ConnectivityManager =
                 (ConnectivityManager) ExtendedApplication.getExtendedApplication().getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        return l_ConnectivityManager.getActiveNetworkInfo() != null &&
-                l_ConnectivityManager.getActiveNetworkInfo().isConnectedOrConnecting();
+        return null != l_ConnectivityManager.getActiveNetworkInfo() &&  l_ConnectivityManager.getActiveNetworkInfo().isConnectedOrConnecting();
     }
 
     private DataObject HTTPRequestSend(Boolean lb_isGet, String ls_URL, String ls_DataString) {
@@ -91,7 +90,7 @@ public class BackGroundHTTPRequest extends BackgroundTaskBridge {
 
             InputStream l_InputStream = null;
 
-            if(li_Status != HttpURLConnection.HTTP_OK)
+            if(HttpURLConnection.HTTP_OK != li_Status)
                 l_InputStream = l_HttpURLConnection.getErrorStream();
             else
                 l_InputStream = l_HttpURLConnection.getInputStream();
