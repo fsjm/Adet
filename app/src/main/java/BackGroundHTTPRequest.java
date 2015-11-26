@@ -1,21 +1,18 @@
 package com.fabricesalmon.adet;
 
-import android.util.Log;
-import java.util.Observer;
-import java.net.URL;
-import android.net.Uri;
-import android.net.NetworkInfo;
-import android.net.ConnectivityManager;
-import java.net.HttpURLConnection;
-import java.net.URLEncoder;
-import java.io.OutputStream;
-import java.io.BufferedWriter;
-import java.io.OutputStreamWriter;
-import java.io.InputStream;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import android.content.Context;
-import java.nio.charset.Charset;
+import android.net.ConnectivityManager;
+import android.net.Uri;
+import android.util.Log;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class BackGroundHTTPRequest extends BackgroundTaskBridge {
     private final String ms_TAG = this.getClass().getSimpleName();
