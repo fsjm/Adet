@@ -1,32 +1,24 @@
 package com.fabricesalmon.adet;
 
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.ArrayAdapter;
-import android.util.Log;
 import android.content.Intent;
-import android.content.IntentFilter;
-import java.util.Observer;
-import java.util.Observable;
-import android.widget.Toast;
-import org.json.JSONObject;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import java.util.List;
-import java.util.ArrayList;
 import android.graphics.Color;
-import android.widget.AbsListView.OnScrollListener;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
 import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 public class MainActivity extends AppCompatActivity implements Observer {
     public static final int CI_RETURN_CODE = 0;
