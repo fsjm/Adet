@@ -26,7 +26,7 @@ public class ListViewItemAdapter extends ArrayAdapter<ListViewItem> {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         if (null == convertView) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.listviewlayout, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.listviewitemlayout, parent, false);
         }
 
         ListViewItemHolder l_ListViewItemHolder = (ListViewItemHolder) convertView.getTag();
